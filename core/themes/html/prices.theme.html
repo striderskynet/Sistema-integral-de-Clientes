@@ -1,0 +1,312 @@
+<div class="container-fluid">
+  <div class="row">
+    <div>
+      <div class="card shadow mb-4">
+        <div class="card-header cursor-pointer d-flex justify-content-between align-items-center">
+          <h6 class="text-primary font-weight-bold m-0">Agregar Elementos</h6>
+        </div>
+        <div class="card-body hide bg-white">
+          <!-- Tabs navs -->
+          <ul class="nav nav-tabs mb-3" id="ex-with-icons" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" data-color="blue" id="ex-with-icons-tab-1" data-toggle="tab" href="#default-tab" role="tab" aria-controls="default-tab" aria-selected="true"
+                ><i class="fas fa-bed fa-fw me-2"></i> Hoteles / Habitaciones / Casas</a
+              >
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" data-color="red" id="ex-with-icons-tab-2" data-toggle="tab" href="#transport-tab" role="tab" aria-controls="transport-tab" aria-selected="false"
+                ><i class="fas fa-car fa-fw me-3"></i><i class="fas fa-bus fa-fw me-3"></i> Transporte</a
+              >
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link disabled" data-color="green" id="ex-with-icons-tab-3" data-toggle="tab" href="#others-tab" role="tab" aria-controls="others-tab" aria-selected="false"
+                ><i class="fas fa-list fa-fw me-2"></i> Otros</a
+              >
+            </li>
+          </ul>
+
+          <div class="tab-content" id="ex-with-icons-content">
+            <div class="tab-pane fade show active" id="default-tab" role="tabpanel" aria-labelledby="ex-with-icons-tab-1">
+              <section class="w-auto tab-subpanel">
+                <div class="ps-5 pe-5 pb-3">
+                  <form method="POST" action="?" id="add_prices_form" autocomplete="on">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <label class="input-group-text"><i class="fas fa-hashtag"></i></label>
+                        <input type="text" id="apf_code" placeholder="Codigo" name="apf_code" class="form-control" required />
+
+                        <label class="input-group-text ms-3"><i class="fas fa-building"></i></label>
+                        <input type="text" id="apf_name" placeholder="Nombre del Hotel" name="apf_name" class="form-control" required />
+
+                        <label class="input-group-text ms-3"><i class="fas fa-bed"></i></label>
+                        <input type="text" id="apf_type" placeholder="Categoria/Habitacion" name="apf_type" class="form-control" required />
+
+                        <label class="input-group-text ms-3"><i class="fas fa-location-arrow"></i></label>
+                        <input type="text" id="apf_place" placeholder="Lugar" name="apf_place" class="form-control" required />
+                      </div>
+                      <br />
+                      <div class="input-group">
+                        <label class="input-group-text">Desde</label>
+                        <input type="date" id="apf_from_date" placeholder="Fecha Desde" name="apf_from_date" class="form-control" required />
+
+                        <label class="input-group-text">Hasta</label>
+                        <input type="date" id="apf_to_date" placeholder="Fecha Hasta" name="apf_to_date" class="form-control" required />
+                        <label class="input-group-text ms-3"><i class="fa fa-cloud" aria-hidden="true"></i></label>
+                        <input type="text" id="apf_season" placeholder="Temporada" name="apf_season" class="form-control" required />
+                        <label class="input-group-text"><i class="fas fa-list"></i></label>
+                        <input type="text" id="apf_plan" placeholder="Plan" name="apf_plan" class="form-control" required />
+                      </div>
+                      <br />
+                      <label>Precio Neto</label>
+                      <div class="input-group">
+                        <div class="input-group">
+                          <label class="input-group-text"><i class="fas fa-dollar"></i></label>
+                          <input type="number" id="apf_price_pax_double" placeholder="Precio por Pax en Doble" name="apf_price_pax_double" class="form-control" required />
+                          <label class="input-group-text"><i class="fas fa-dollar"></i></label>
+                          <input type="number" id="apf_price_simple" placeholder="Suplemento Sencilla" name="apf_price_simple" class="form-control" />
+
+                          <label class="input-group-text"><i class="fas fa-dollar"></i></label>
+                          <input type="number" id="apf_price_tripled" placeholder="Suplemento Tercer Pax" name="apf_price_tripled" class="form-control" />
+
+                          <label class="input-group-text"><i class="fas fa-utensils"></i></label>
+                          <input type="number" id="apf_price_dinner" placeholder="Suplemento de Cena" name="apf_price_dinner" class="form-control" />
+                        </div>
+                      </div>
+                      <br />
+                      <label>Precio de Venta</label>
+                      <div class="input-group">
+                        <div class="input-group">
+                          <label class="input-group-text"><i class="fas fa-dollar"></i></label>
+                          <input type="number" id="apf_hab_doble" placeholder="Habitacion doble" name="apf_hab_doble" class="form-control" required />
+                          <label class="input-group-text"><i class="fas fa-dollar"></i></label>
+                          <input type="number" id="apf_hab_simple" placeholder="Habitacion Sencilla" name="apf_hab_simple" class="form-control" />
+
+                          <label class="input-group-text"><i class="fas fa-dollar"></i></label>
+                          <input type="number" id="apf_hab_tripled" placeholder="Habitacion triple" name="apf_hab_tripled" class="form-control" />
+
+                          <label class="input-group-text ms-3"><i class="fas fa-dollar"></i></label>
+                          <input type="text" id="apf_offert" placeholder="Oferta" name="apf_offert" class="form-control" required />
+                          <label class="input-group-text">Validez</label>
+                          <input type="text" id="apf_offert_validity" placeholder="Validez de la Oferta" name="apf_offert_validity" class="form-control" required />
+                        </div>
+                      </div>
+                      <br />
+                      <div class="input-group">
+                        <label class="input-group-text"><i class="fas fa-calendar"></i></label>
+                        <input type="date" id="apf_offert_from" placeholder="Oferta desde" name="apf_offert_from" class="form-control" />
+                        <label class="input-group-text"><i class="fas fa-calendar"></i></label>
+                        <input type="date" id="apf_offert_to" placeholder="Oferta hasta" name="apf_offert_to" class="form-control" />
+                        <label class="input-group-text"><i class="fas fa-building"></i></label>
+                        <input type="text" id="apf_provider" placeholder="Proveedor" name="apf_provider" class="form-control" />
+                        <label class="input-group-text ms-3"><i class="fas fa-child"></i></label>
+                        <input type="text" id="apf_kids_policy" placeholder="Politica de niños" name="apf_kids_policy" class="form-control" required />
+                        <label class="input-group-text"><i class="fa fa-bed" aria-hidden="true"></i></label>
+                        <input type="text" id="apf_room_vacancy" placeholder="Capacidad de Habitacion" name="apf_room_vacancy" class="form-control" required />
+                      </div>
+                      <br />
+
+                      <div class="input-group d-flex justify-content-end">
+                        <input type="button" id="apf_import" class="btn btn-success" value="Importar tabla" />
+                        <input type="button" id="apf_clear_button" class="btn btn-secondary" value="Cancelar" />
+                        <input type="submit" class="btn btn-primary" value="Agregar" />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </section>
+            </div>
+            <div class="tab-pane fade" id="transport-tab" role="tabpanel" aria-labelledby="ex-with-icons-tab-2">
+              <section class="w-auto tab-subpanel">
+                <div class="ps-5 pe-5 pb-3">
+                  <form method="POST" action="?" id="add_transport_form" autocomplete="on">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <label class="input-group-text"><i class="fas fa-hashtag"></i></label>
+                        <input type="text" id="apf_code" placeholder="Codigo" name="apf_code" class="form-control" required />
+
+                        <label class="input-group-text ms-3"><i class="fas fa-location-arrow"></i></label>
+                        <input type="text" id="apf_from_place" placeholder="Origen" name="apf_from_place" class="form-control" required />
+
+                        <label class="input-group-text ms-3"><i class="fas fa-location-arrow"></i></label>
+                        <input type="text" id="apf_to_place" placeholder="Destino" name="apf_to_place" class="form-control" required />
+                      </div>
+                      <br />
+                      <div class="input-group">
+                        <label class="input-group-text"><i class="fas fa-car fa-fw"></i><i class="fas fa-bus fa-fw"></i></label>
+                        <select id="apf_vehicle_type" name="apf_vehicle_type" class="form-control" required>
+                          <option value="" disabled selected>Tipo de Vehiculo</option>
+                          <option value="taxi">Taxi</option>
+                          <option value="microbus">Microbus</option>
+                          <option value="minibus">Minibus</option>
+                          <option value="bus">Bus</option>
+                        </select>
+                        
+                        <label class="input-group-text ms-3"><i class="fas fa-building"></i></label>
+                        <input style="max-width: 200px" type="text" id="apf_agency" placeholder="Agencia" name="apf_agency" class="form-control" required />
+
+                        <label class="input-group-text ms-3"><i class="fas fa-users"></i></label>
+                        <input style="max-width: 200px" type="text" id="apf_vehicle_max_passenger" placeholder="Maximo de Pasajeros" name="apf_vehicle_max_passenger" class="form-control" required />
+
+                        <label class="input-group-text ms-3"><i class="fas fa-dollar"></i></label>
+                        <input style="max-width: 200px" type="text" id="apf_vehicle_price" placeholder="Precio por vehiculo" name="apf_vehicle_price" class="form-control" required />
+                      </div>
+                      <br />
+                      <div class="input-group d-flex justify-content-end">
+                        <input type="button" id="apf_import" class="btn btn-success" value="Importar tabla" />
+                        <input type="button" id="apf_clear_button" class="btn btn-secondary" value="Cancelar" />
+                        <input type="submit" class="btn btn-primary" value="Agregar" />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </section>
+            </div>
+            <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tabs navs -->
+  <div class="d-flex justify-content-end table-buttons">
+    <span class="me-2" data-tooltip="Eliminar los listados">
+      <button id="delete_price_button" type="button" class="btn btn-sm btn-danger btn-icon-split hide">
+        <span class="icon text-white"><i class="fa fa-minus-circle" aria-hidden="true"></i></span>
+        <span class="text"><strong>0</strong></span>
+      </button>
+    </span>
+    <span class="me-2" data-tooltip="Duplicar los listados">
+      <button id="duplicate_price_button" type="button" class="btn btn-sm btn-icon-split btn-success btn-icon-split hide">
+        <span class="icon text-white"><i class="fa fa-copy" aria-hidden="true"></i></span>
+        <span class="text text-white"><strong>0</strong></span>
+      </button>
+    </span>
+    <span class="me-5" data-tooltip="Copiar al Clipboard">
+      <button id="copy_price_button" type="button" class="btn btn-sm btn-icon-split btn-warning btn-icon-split hide">
+        <span class="icon text-white"><i class="fa fa-list" aria-hidden="true"></i></span>
+        <span class="text text-white"><strong>0</strong></span>
+      </button>
+    </span>
+  </div>
+<ul class="nav nav-tabs mb-3 mx-5" id="ex-with-icons" role="tablist">
+  <li class="nav-item mx-3" role="presentation">
+    <a class="nav-link active" data-color="blue" id="ex-with-icons-tab-1" data-toggle="tab" href="#ex-with-icons-tabs-1" role="tab" aria-controls="ex-with-icons-tabs-1" aria-selected="true"
+      ><i class="fas fa-building fa-fw me-2"></i><i class="fas fa-bed fa-fw me-2"></i><i class="fas fa-house fa-fw me-2"></i> Hoteles / Habitaciones / Casas</a
+    >
+  </li>
+  <li class="nav-item mx-3" role="presentation">
+    <a class="nav-link" data-color="red" id="ex-with-icons-tab-2" data-toggle="tab" href="#ex-with-icons-tabs-2" role="tab" aria-controls="ex-with-icons-tabs-2" aria-selected="false"
+      ><i class="fas fa-car fa-fw me-3"></i><i class="fas fa-bus fa-fw me-3"></i> Transporte</a
+    >
+  </li>
+  <li class="nav-item mx-3" role="presentation">
+    <a class="nav-link disabled" data-color="green" id="ex-with-icons-tab-3" data-toggle="tab" href="#ex-with-icons-tabs-3" role="tab" aria-controls="ex-with-icons-tabs-3" aria-selected="false"
+      ><i class="fas fa-list fa-fw me-2"></i> Otros</a
+    >
+  </li>
+</ul>
+
+<div class="tab-content" id="ex-with-icons-content">
+  <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel" aria-labelledby="ex-with-icons-tab-1">
+    <section class="w-auto">
+      <main class="main_wrapper mx-auto flex-shrink-0">
+        <table id="main-table" class="table table-responsive">
+          <form id="elem_form" name="" action="" method="">
+            <thead class="table-dark fs-6 text-muted">
+              <tr>
+                <th>
+                  <span data-tooltip-location="right" data-tooltip="Shift+Click para invertir la seleccion"><input id="data-check-all" class="data-check-all" dataset-id="data-t" name="" value="0" type="checkbox" /></span>
+                </th>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Tipo / Lugar</th>
+                <th>Desde / Hasta</th>
+                <th>Temporada / Plan</th>
+                <th>Doble / Sencilla / Triple / Cena</th>
+                <th>Venta Doble / Sencilla / Triple</th>
+                <th>Oferta / Validez</th>
+                <th>Desde / Hasta / Proveedor</th>
+                <th>Niños / Capacidad</th>
+              </tr>
+            </thead>
+            <tbody id="main-table-body" style="font-size: 14px">
+              <!-- Data ROW -->
+              <tr class="hide" id="data-default">
+                <td style="width: 20px">
+                  <input id="data-default-check-{id}" name="data_selected[]" value="0" type="checkbox" />
+                </td>
+                <td class="editable align-start" data-type="code"><label>{code}</label><input type="text" value="{code}" /></td>
+
+                <td class="editable" data-type="name"><label>{name}</label><input type="text" value="{name}" /></td>
+                <td class="editable" data-type="type">
+                  <label>{type}</label><input class="form-control form-control-sm" type="text" value="{type}" /> / <label>{place}</label
+                  ><input class="form-control form-control-sm" type="text" value="{place}" />
+                </td>
+                <td>{from_date} / {to_date}</td>
+                <td>{season} / {plan}</td>
+                <td>{price_pax_double}$ / {price_simple}$ / {price_tripled}$ / {price_dinner}$</td>
+                <td>{hab_doble}$ / {hab_simple}$ / {hab_tripled}$</td>
+                <td>{offert} / {offert_validity}</td>
+                <td>{offert_from} / {offert_to} / {provider}</td>
+                <td>{kids_policy} / {room_vacancy}</td>
+              </tr>
+            </tbody>
+          </form>
+        </table>
+      </main>
+      <nav aria-label="...">
+        <div class="table-label">Mostrando <strong id="table-label-min">0</strong>-<strong id="table-label-max">0</strong> de un total de <strong id="table-label-total">0</strong></div>
+        <ul id="main_prices_pagination" class="pagination pagination-circle m-3 justify-content-end"></ul>
+      </nav>
+    </section>
+  </div>
+
+  <div class="tab-pane fade" id="ex-with-icons-tabs-2" role="tabpanel" aria-labelledby="ex-with-icons-tab-2">
+    <section class="w-auto">
+      <main class="main_wrapper mx-auto flex-shrink-0">
+        <table id="main-transport-table" class="table table-responsive">
+          <form id="elem_form" name="" action="" method="">
+            <thead class="table-dark fs-6 text-muted">
+              <tr>
+                <th>
+                  <span data-tooltip-location="right" data-tooltip="Shift+Click para invertir la seleccion"><input id="data-check-all" class="data-check-all" name="" value="0" type="checkbox" /></span>
+                </th>
+                <th>Codigo</th>
+                <th>Origen</th>
+                <th>Destino</th>
+                <th>Agencia</th>
+                <th>Vehiculo</th>
+                <th>Maximo de Pasajeros</th>
+                <th>Precio</th>
+              </tr>
+            </thead>
+            <tbody id="main-table-body" style="font-size: 14px">
+              <!-- Data ROW -->
+              <tr class="hide" id="data-transport-default">
+                <td style="width: 20px">
+                  <input id="data-transport-check-{id}" name="data_selected[]" value="0" type="checkbox" />
+                </td>
+                <td class="editable" data-type="code"><label>{code}</label><input type="text" value="{code}" /></td>
+                <td class="editable" data-type="from_place"><label>{from_place}</label><input type="text" value="{from_place}" /></td>
+                <td class="editable" data-type="to_place"><label>{to_place}</label><input type="text" value="{to_place}" /></td>
+                <td class="editable" data-type="agency"><label>{agency}</label><input type="text" value="{agency}" /></td>
+                <td class="editable" data-type="vehicle_type"><label>{vehicle_type}</label><input type="text" value="{vehicle_type}" /></td>
+                <td class="editable" data-type="vehicle_max_passenger"><label>{vehicle_max_passenger}</label><input type="text" value="{vehicle_max_passenger}" /></td>
+                <td class="editable" data-type="vehicle_price"><label>{vehicle_price}</label><input type="text" value="{vehicle_price}" />$</td>
+              </tr>
+            </tbody>
+          </form>
+        </table>
+        </span>
+      </main>
+    </section>
+  </div>
+  <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">Details Content</div>
+ 
+</div>
+
+
+<br /><br />
+<br /><br />

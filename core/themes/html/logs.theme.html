@@ -1,0 +1,56 @@
+<style>
+  .log_wrapper .card {
+    margin: 0px 50px;
+  }
+
+  .log_select {
+    display: block;
+    margin: 20px;
+    text-align: right;
+    width: 90%;
+  }
+
+  .log_select .form-select {
+    margin-left: auto;
+    display: block;
+    max-width: 500px;
+  }
+
+  span.date {
+    font-weight: bold;
+  }
+
+  .log_data {
+    color: black;
+    cursor: pointer;
+  }
+
+  .log_warn {
+    color: var(--bs-warning);
+  }
+
+  .log_logi {
+    color: var(--bs-primary);
+  }
+</style>
+<div class="log_select">
+  <select id="logs_select" class="form-select" onchange="load_logs(this.value)">
+    {logs_directory}
+  </select>
+</div>
+<div class="log_wrapper">
+  <div class="card shadow">
+    <div class="card-header py-3">
+      <h6 id="log_file_name" class="text-primary font-weight-bold m-0">{file_name}</h6>
+    </div>
+    <ul id="log_wrapper" class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="row align-items-center no-gutters">
+          <div class="col mr-2">
+            <h6 class="mb-0"><strong></strong></h6>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

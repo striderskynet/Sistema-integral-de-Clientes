@@ -1,0 +1,58 @@
+<!-- Voucher Table Wrapper -->
+<div class="main_wrapper mx-auto flex-shrink-0">
+    <div class="form-check left-absolute"></div>
+    <div class='d-flex justify-content-end'>
+        <span data-tooltip="Agregar nueva reserva">
+            <button id="button_voucher_add" type="button" class="btn btn-icon-split btn-success m-2">
+            <span class="icon text-white"><i class="fas fa-circle-plus"></i></span>
+            <span class="text">Agregar</span>
+        </button>
+        </span>
+    </div>
+
+    <table id='main-table' class="table table-striped table-hover align-middle mb-0 bg-white rounded-top">
+        <thead class="table-dark fs-6 text-muted">
+            <tr>
+                <th class="align-start">A nombre de</th>
+                <th>Acompañantes</th>
+                <th>ID</th>
+                <th>Info</th>
+                <th>Compañía</th>
+                <th>Entrada / Salida</th>
+                <th>Confirmacion</th>
+                <th>Accion</th>
+            </tr>
+        </thead>
+        <tbody id='main-table-body'>
+            <!-- Data ROW -->
+            <tr  class='hide' id='data-default' data-user-id="u01">
+                <td>
+                    <div class="d-flex align-items-center ps-2">
+                        {profile_picture}</i>
+                        <div class="ms-1" style='font-size: 15px;'>
+                            <p class="fw-bold mb-1"><strong>{prefix}</strong> {name} {lastname}</p>
+                        </div>
+                    </div>
+                </td>
+                <td class="align-middle">{additional_clients}</td>
+                <td class="align-middle"><span class="badge bg-primary p-2">{type}</span></td>
+                <td class="align-middle">{data}</td>
+                <td class="align-middle">{service_partner}</td>
+                <td class="align-middle"><span class='text-success'><i class="fa fa-sign-in" aria-hidden="true"></i> {in_date}</span><br><span class='text-danger'><i class="fa fa-sign-out" aria-hidden="true"></i> {out_date}</span></td>
+                <td class="align-middle">{confirmation_number}</td>
+                <td style='min-width: 100px;' class="align-middle">
+                    <div class='hide' id='voucher-buttons-{voucher_id}'>
+                        <span data-tooltip="Imprimir el voucher"><button id="button_voucher_print" onclick="button_voucher_print(this)" data-voucher-id="{voucher_id}" type="button" class="btn btn-primary btn-sm"><i class="fas fa-print"></i></button></span>
+                        <span data-tooltip="Eliminar la reserva"><button id="button_voucher_del" onclick="button_voucher_del(this)" data-voucher-id="{voucher_id}" type="button" class="btn btn-danger btn-sm"><i class="fas fa-ban"></i></button></span>
+                    </div>    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <nav aria-label="...">
+        <div class='table-label'>Mostrando <strong id='table-label-min'>0</strong>-<strong id='table-label-max'>0</strong> de un total de <strong id='table-label-total'>0</strong></div>
+        <ul id='main_client_pagination' class="pagination pagination-circle m-3 justify-content-end">
+        </ul>
+    </nav>
+</div>
