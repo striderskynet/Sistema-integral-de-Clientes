@@ -210,9 +210,15 @@ function prices_duplicate()
 
     $query = null;
 
+    $table = "price_" . $_GET['table'];
+
+    $tb['col']['price_list'] = "`code`, `name`, `type`, `place`, `from_date`, `to_date`, `season`, `plan`, `price_pax_double`, `price_simple`, `price_tripled`, `price_dinner`, `hab_doble`, `hab_simple`, `hab_tripled`, `offert`, `offert_validity`, `offert_from`, `offert_to`, `provider`, `kids_policy`, `room_vacancy`";
+    $tb['col']['price_transport'] = "`code`, `from_place`, `to_place`, `vehicle_type`, `vehicle_max_passenger`, `vehicle_price`, `agency`";
+
     foreach ($_POST['info'] as $id) {
-        $query = "INSERT INTO `price_list` (`code`, `name`, `type`, `place`, `from_date`, `to_date`, `season`, `plan`, `price_pax_double`, `price_simple`, `price_tripled`, `price_dinner`, `hab_doble`, `hab_simple`, `hab_tripled`, `offert`, `offert_validity`, `offert_from`, `offert_to`, `provider`, `kids_policy`, `room_vacancy`) 
-        SELECT `code`, `name`, `type`, `place`, `from_date`, `to_date`, `season`, `plan`, `price_pax_double`, `price_simple`, `price_tripled`, `price_dinner`, `hab_doble`, `hab_simple`, `hab_tripled`, `offert`, `offert_validity`, `offert_from`, `offert_to`, `provider`, `kids_policy`, `room_vacancy` FROM `price_list` WHERE `id`={$id};";
+        $query = "INSERT INTO `{$table}` ({$tb['col'][$table]}) SELECT {$tb['col'][$table]} FROM `{$table}` WHERE `id`={$id};";
+        //$query = "INSERT INTO `{$table}` ({$tb['col'][$table]}) SELECT {$tb['col'][$table]} FROM `{$table}` WHERE `id`={$id};";
+
         $db->query($query);
     }
 

@@ -157,7 +157,14 @@ if (isset($_SESSION['USERID'])) {
             </div>
         </div>
     </nav>
-
+    <div id="update" class='hide update'>
+        <span data-tooltip-location="bottom" data-tooltip="Click para actualizar online">
+            <button id="button_voucher_add" type="button" class="btn btn-icon-split btn-danger m-2">
+                <span class="icon text-white"><i class="fas fa-cloud-upload"></i></span>
+                <span class="text">Actualizar a {online_version}</span>
+            </button>
+        </span>
+    </div>
     <div class="p-4">
         <h1 class="" id='position_title'>Listado de Clientes</h1>
         <!-- Breadcrumb -->

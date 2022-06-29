@@ -581,3 +581,10 @@ input[type="radio"]:checked + label {
   right: 15px;
   margin-top: 10px;
 }
+
+.update {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10px;
+}

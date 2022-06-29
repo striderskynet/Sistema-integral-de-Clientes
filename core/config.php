@@ -7,7 +7,7 @@ define("_LOCAL", $_SERVER['DOCUMENT_ROOT'] . DS);
 define("_THEME_DIR", _LOCAL . "core" . DS . "themes" . DS);
 
 define("_VERSION", "0.1.5-alpha");
-define("_COMMIT", "2022-06-20T19:14:50Z");
+define("_COMMIT", "2022-06-29T20:28:52Z");
 define("_DEBUG", true);
 
 

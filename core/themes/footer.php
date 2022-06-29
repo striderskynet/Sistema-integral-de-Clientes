@@ -21,7 +21,7 @@
 
 <script type="text/javascript" src="./core/script.php?js=main"></script>
 <?php
-if ($theme_script) echo ("<script type=\"text/javascript\" src=\"./core/script.php?js=$theme_script\" ></script>");
+if ($theme_script) echo ("<script type=\"text/javascript\" src=\"./core/script.php?js=$theme_script\" defer></script>");
 ?>
 <script>
   set_position(<?php echo @$login ?>);
