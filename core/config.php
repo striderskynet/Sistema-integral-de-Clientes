@@ -6,7 +6,7 @@ define("DS", DIRECTORY_SEPARATOR);
 define("_LOCAL", $_SERVER['DOCUMENT_ROOT'] . DS);
 define("_THEME_DIR", _LOCAL . "core" . DS . "themes" . DS);
 
-define("_VERSION", "0.1.3-alpha");
+define("_VERSION", "0.1.5-alpha");
 define("_COMMIT", "2022-06-20T19:14:50Z");
 define("_DEBUG", true);
 

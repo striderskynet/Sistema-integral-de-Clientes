@@ -649,8 +649,8 @@ $(document).ready(function () {
     $("#main-table").addClass("table-sm");
   }
 
-  $.ajax({
-    url: "https://api.github.com/repos/striderskynet/ICC/branches/master",
+  https: $.ajax({
+    url: "https://api.github.com/repos/striderskynet/Sistema-integral-de-Clientes/branches/master",
     //headers: {"Authorization": "token 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"}
   }).done(function (data) {
     //console.log(data);
