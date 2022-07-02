@@ -142,21 +142,6 @@ function button_user_del(button) {
   }, 200);
 }
 
-function button_voucher_add(button) {
-  clientModalShow = false;
-
-  add_voucher_modal.show();
-
-  let id = button.dataset.userId;
-  let name = button.dataset.userName;
-
-  select_name("#mres_client_name", name, id);
-
-  setTimeout(function () {
-    clientModalShow = true;
-  }, 200);
-}
-
 $("#button_client_add").click(function () {
   console.log("Mostrando modal de Cliente Nuevo");
   add_client_modal.show();
@@ -245,10 +230,6 @@ $("#button_generate_client").click(function () {
   });
 });
 
-function randomDate(start, end) {
-  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-}
-
 let oPost = false;
 
 $("#main-table")
@@ -300,18 +281,3 @@ $("#add_client_modal").on("shown.bs.modal", function (e) {
     //populate_data(JSON.parse(data), offset, main_table, main_table_row);
   });
 });
-
-function populate_agency(elem, data) {
-  let list = $(elem);
-
-  delete data.info;
-
-  Object.keys(data).forEach((key) => {
-    let new_option = document.createElement("option");
-    new_option.value = data[key].id;
-    new_option.innerHTML = data[key].type + ": " + data[key].name;
-
-    list.append(new_option);
-    console.log(data[key]);
-  });
-}

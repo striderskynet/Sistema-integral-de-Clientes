@@ -69,7 +69,8 @@ function show_alert(type, message, timer = 10) {
   });
 }
 
-function tokenize(rep_array, value) {
+// Tokenize Function (Data Array to Replace, Data)
+const tokenize = (rep_array, value) => {
   for (var key in rep_array) {
     if (key === "status") {
       switch (rep_array[key].toLowerCase()) {
@@ -95,7 +96,7 @@ function tokenize(rep_array, value) {
   }
 
   return value;
-}
+};
 
 function populate_data(clients_data, offset = 1, m_table, m_table_row, type = "client", body = "main-table-body") {
   m_table[0].innerHTML = "";
@@ -223,11 +224,48 @@ function show_client_modal(id) {
   }
 }
 
-function getAgency(id) {
-  $.get("./api/?prices&list&table=price_agency&wh=WHERE id=" + id, function (data) {});
+//function populate_agency(elem, data) {
+const populate_agency = (elem, data) => {
+  let list = $(elem);
+  list.html("");
+
+  delete data.info;
+
+  Object.keys(data).forEach((key) => {
+    let new_option = document.createElement("option");
+    new_option.value = data[key].id;
+    new_option.innerHTML = data[key].name + ": " + data[key].type;
+
+    list.append(new_option);
+  });
+};
+
+function randomDate(start, end) {
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
-function nl2br(str, is_xhtml) {
+//function button_voucher_add(button) {
+const button_voucher_add = (button) => {
+  clientModalShow = false;
+
+  add_voucher_modal.show();
+
+  let id = button.dataset.userId;
+  let name = button.dataset.userName;
+
+  select_name("#mres_client_name", name, id);
+
+  setTimeout(function () {
+    clientModalShow = true;
+  }, 200);
+};
+
+const getAgency = (id) => {
+  $.get(`./api/?prices&list&table=price_agency&wh=WHERE id=${id}`);
+};
+
+//function nl2br(str, is_xhtml) {
+const nl2br = (str, is_xhtml) => {
   if (typeof str === "undefined" || str === null) {
     return "";
   }
@@ -237,7 +275,7 @@ function nl2br(str, is_xhtml) {
   if ($res.length > 30) $res = $res.substring(0, 20) + "...";
 
   return $res;
-}
+};
 
 function show_companions(companions) {
   var ret = "";
@@ -245,8 +283,6 @@ function show_companions(companions) {
   if (companions) {
     companions.forEach((val) => {
       ret += ` <span data-tooltip="${val.name}"><a href="#" onclick="show_client_modal(${val.id})" class="client-sidemen">${val.profile_picture}</a></span>`;
-      //ret += "<button onclick=\"show_client_modal(" + val.id + ")\" class=\"btn btn-dark btn-sm ms-1\" title=\"" + val.name + "\">" + val.profile_picture + "</button>";
-      //console.dir(val);
     });
   } else {
     ret = "Ninguno";
@@ -508,9 +544,125 @@ function alert(type = "normal", color = "default", value = "default", date = "de
     if (alert_count > 0) alert_counter.show();
     else alert_counter.hide();
   }
-
-  // console.log( alert_elem.html() );
 }
+
+const select_item = (id, no) => {
+  //function select_item(id, no) {
+  if ($("#" + id).hasClass("price-selected")) {
+    $("#" + id).removeClass("price-selected");
+    $("#data" + dTable + "-check-" + no).prop("checked", false);
+    delete selected_items.splice(selected_items.indexOf(no), 1);
+  } else {
+    $("#" + id).addClass("price-selected");
+    $("#data" + dTable + "-check-" + no).prop("checked", true);
+    selected_items.push(no);
+    lastSelectedItem = [id, no];
+  }
+};
+
+//function select_tr(element, no, event, suffix = "data_p") {
+const select_tr = (element, no, event, suffix = "data_p") => {
+  id = element.id.replace(suffix, "");
+  //element.classlist.add("bg-primary");
+  //console.log($("#data-check-" + no));
+
+  if (event.shiftKey) {
+    //console.log(lastSelectedItem);
+    lastID = lastSelectedItem[0].replace(suffix, "");
+    lastNO = lastSelectedItem[1];
+
+    //console.log(`Selecting from ${lastID} to ${id}`);
+
+    r = 0;
+    for (q = parseInt(lastID) + 1; q <= id; q++) {
+      select_item(`${suffix}${q}`, no - r);
+      r++;
+    }
+  } else {
+    select_item(element.id, no);
+  }
+
+  var len = selected_items.length;
+  $("#delete_price_button span strong").html(len);
+  $("#duplicate_price_button span strong").html(len);
+  $("#copy_price_button span strong").html(len);
+
+  if (len > 0) {
+    $("#delete_price_button").fadeIn();
+    $("#duplicate_price_button").fadeIn();
+    $("#copy_price_button").fadeIn();
+  } else {
+    $("#delete_price_button").fadeOut();
+    $("#duplicate_price_button").fadeOut();
+    $("#copy_price_button").fadeOut();
+  }
+};
+
+//function clear_selected() {
+const clear_selected = () => {
+  selected_items = [];
+  var len = selected_items.length;
+  $("#delete_price_button span strong").html(len);
+  $("#duplicate_price_button span strong").html(len);
+  $("#copy_price_button span strong").html(len);
+
+  $("#delete_price_button").hide();
+  $("#duplicate_price_button").hide();
+  $("#copy_price_button").hide();
+
+  $(".data-check-all").prop("checked", false);
+
+  $("[id^='data" + dTable + "-check']").each(function () {
+    $(this).prop("checked", false);
+    $(this).parent().parent().removeClass("price-selected");
+  });
+};
+
+$(".data-check-all").click(function (event) {
+  if ($(this).is(":checked")) {
+    $("[id^='data" + dTable + "-check-'").prop("checked", true);
+    $("[id^='data" + dTable + "-check-'").each(function (event2) {
+      if ($(this).attr("id") != "data-check-all") {
+        if (event.shiftKey == true) {
+          let elem = document.getElementById($(this).parents("tr").attr("id"));
+          select_tr(
+            elem,
+            $(this)
+              .attr("id")
+              .replace("data" + dTable + "-check-", ""),
+            elem
+          );
+        } else {
+          if ($(this).parents("tr").hasClass("price-selected") === false) {
+            let elem = document.getElementById($(this).parents("tr").attr("id"));
+            select_tr(
+              elem,
+              $(this)
+                .attr("id")
+                .replace("data" + dTable + "-check-", ""),
+              elem
+            );
+          }
+        }
+      }
+    });
+  } else {
+    $("[id^='data" + dTable + "-check-'").prop("checked", false);
+    $("[id^='data" + dTable + "-check-'").each(function (event) {
+      if ($(this).attr("id") != "data-check-all") {
+        let elem = document.getElementById($(this).parents("tr").attr("id"));
+        select_tr(
+          elem,
+          $(this)
+            .attr("id")
+            .replace("data" + dTable + "-check-", ""),
+          event
+        );
+      }
+    });
+  }
+});
+// END OF FUNCTIONS ---- START OF ACTIONS
 
 // On Logout Button Click just LOGOUT and Reload
 $("#logout_button").click(function () {
@@ -697,15 +849,6 @@ $(document).ready(function () {
         }
       });
     });
-
-    /*$.ajax({
-      url: "./core/verify_update.php",
-      type: "POST",
-      data: { d: data },
-      success: function (msg) {
-        console.log(msg);
-      },
-    });*/
   });
 
   $("input[type=password]").each(function (e) {

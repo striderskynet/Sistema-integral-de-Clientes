@@ -82,7 +82,7 @@
                         <div class="input-group">
                             <label class="input-group-text"><i class="fas fa-building"></i></label>
                             <select id="acf_contact_agency" name='acf_contact_agency' value="Unknown" text="Estado" class="form-select form-control">
-                                <option value='0' selected>Directo</option>
+
                             </select>
                         </div>
                     </div>

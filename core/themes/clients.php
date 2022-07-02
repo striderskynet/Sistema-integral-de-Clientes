@@ -4,6 +4,7 @@ $position = array('Clientes', 'Listado de Clientes', 'clients');
 $theme_script = "clients";
 //$clients_data = api("clients", "list");
 ?>
+
 <script defer>
     let pagination = <?php echo $config['misc']['pagination'] ?>;
     let position = [];
