@@ -1,0 +1,2 @@
+2022-06-30 02:21:07	| Data	|	nesty	|	DELETE FROM price_transport WHERE `id` IN (12);
+2022-06-30 02:49:45	| Data	|	nesty	|	DELETE FROM price_agency WHERE `id` IN (3);

@@ -649,6 +649,7 @@ $(document).ready(function () {
     $("#main-table").addClass("table-sm");
   }
 
+  /*
   https: $.ajax({
     url: "https://api.github.com/repos/striderskynet/Sistema-integral-de-Clientes/branches/master",
     //headers: {"Authorization": "token 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"}
@@ -669,6 +670,42 @@ $(document).ready(function () {
         `Existe una nueva actualizacion del sistema con fecha de <strong>${date_commit.toLocaleDateString("en-US")}</strong> por "<strong>${com["user"]}</strong>" con el mensaje "${com["message"]}"`,
         date_commit.toLocaleDateString("en-US")
       );
+  });*/
+
+  https: $.ajax({
+    url: github_address,
+    //headers: {"Authorization": "token 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"}
+  }).done(function (data) {
+    Object.keys(data).forEach((key) => {
+      if (data[key].tag_name >= github_version) {
+        $("#update_button").toggle();
+        $("#update_button")
+          .find(".text")
+          .html("Actualizar: v" + data[key].name);
+      }
+
+      $("#update_button").click(function () {
+        if (confirm("Estas seguro de querer actualizar?")) {
+          $.ajax({
+            url: "./core/verify_update.php",
+            type: "POST",
+            data: { data: data[key] },
+            success: function (msg) {
+              console.log(msg);
+            },
+          });
+        }
+      });
+    });
+
+    /*$.ajax({
+      url: "./core/verify_update.php",
+      type: "POST",
+      data: { d: data },
+      success: function (msg) {
+        console.log(msg);
+      },
+    });*/
   });
 
   $("input[type=password]").each(function (e) {

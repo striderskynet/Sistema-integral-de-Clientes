@@ -258,6 +258,19 @@ $("#apf_clear_button").click(function () {
   $("#apf_code").focus();
 });
 
+$("#offert_div").toggle();
+
+$("#apf_offert_check").click(function () {
+  $("#offert_div").toggle();
+
+  $("#apf_offert_from").prop("min", $("#apf_from_date").val());
+  $("#apf_offert_to").prop("min", $("#apf_from_date").val());
+  $("#apf_offert_from").prop("max", $("#apf_to_date").val());
+  $("#apf_offert_to").prop("max", $("#apf_to_date").val());
+});
+
+$("#apf_from_date").on("change", function () {});
+
 var dTable = "-default";
 $('a[data-toggle="tab"]').on("shown.bs.tab", function (event) {
   switch (event.target.id) {

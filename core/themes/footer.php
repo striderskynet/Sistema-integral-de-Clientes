@@ -13,7 +13,7 @@
           <a href="" class="me-4 text-reset"><i class="fab fa-github"></i></a>
         </div>-->
   </section>
-  <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.05);">&copy; 2022 Copyright -- <?php echo _VERSION ?> --
+  <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.05);">&copy; 2022 Copyright -- <?php echo _FULLVERSION ?> --
     <a class="text-reset fw-bold" href="https://github.com/striderskynet/ICC">GitHub / StriderSkynet</a>
   </div>
 </footer>

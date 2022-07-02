@@ -25,9 +25,10 @@ if (isset($_SESSION['USERID'])) {
     <link href="./assets/css/flags.css" rel="stylesheet" />
     <link href="./assets/css/font.google.css" rel="stylesheet" />
 
-
     <script>
         const last_commit = "<?php echo _COMMIT ?>";
+        const github_address = "<?php echo $github['address'] ?>";
+        const github_version = "<?php echo $github['version'] ?>";
     </script>
     <script type="text/javascript" src="./assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="./assets/js/popper.min.js"></script>
@@ -157,11 +158,11 @@ if (isset($_SESSION['USERID'])) {
             </div>
         </div>
     </nav>
-    <div id="update" class='hide update'>
+    <div id="update_button" class='hide update'>
         <span data-tooltip-location="bottom" data-tooltip="Click para actualizar online">
             <button id="button_voucher_add" type="button" class="btn btn-icon-split btn-danger m-2">
                 <span class="icon text-white"><i class="fas fa-cloud-upload"></i></span>
-                <span class="text">Actualizar a {online_version}</span>
+                <span id="text" class="text">Actualizar a {online_version}</span>
             </button>
         </span>
     </div>

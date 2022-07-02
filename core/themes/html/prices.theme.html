@@ -51,6 +51,9 @@
 
                         <label class="input-group-text">Hasta</label>
                         <input type="date" id="apf_to_date" placeholder="Fecha Hasta" name="apf_to_date" class="form-control" required />
+
+                        <label class="input-group-text ms-3"><i class="fas fa-building"></i></label>
+                        <input type="text" id="apf_provider" placeholder="Proveedor" name="apf_provider" class="form-control" />
                         <label class="input-group-text ms-3"><i class="fa fa-cloud" aria-hidden="true"></i></label>
                         <input type="text" id="apf_season" placeholder="Temporada" name="apf_season" class="form-control" required />
                         <label class="input-group-text"><i class="fas fa-list"></i></label>
@@ -75,33 +78,33 @@
                       <br />
                       <label>Precio de Venta</label>
                       <div class="input-group">
-                        <div class="input-group">
-                          <label class="input-group-text"><i class="fas fa-dollar"></i></label>
-                          <input type="number" id="apf_hab_doble" placeholder="Habitacion doble" name="apf_hab_doble" class="form-control" required />
-                          <label class="input-group-text"><i class="fas fa-dollar"></i></label>
-                          <input type="number" id="apf_hab_simple" placeholder="Habitacion Sencilla" name="apf_hab_simple" class="form-control" />
+                        <label class="input-group-text"><i class="fas fa-dollar"></i></label>
+                        <input type="number" id="apf_hab_doble" placeholder="Habitacion doble" name="apf_hab_doble" class="form-control" required />
+                        <label class="input-group-text"><i class="fas fa-dollar"></i></label>
+                        <input type="number" id="apf_hab_simple" placeholder="Habitacion Sencilla" name="apf_hab_simple" class="form-control" />
 
-                          <label class="input-group-text"><i class="fas fa-dollar"></i></label>
-                          <input type="number" id="apf_hab_tripled" placeholder="Habitacion triple" name="apf_hab_tripled" class="form-control" />
+                        <label class="input-group-text"><i class="fas fa-dollar"></i></label>
+                        <input type="number" id="apf_hab_tripled" placeholder="Habitacion triple" name="apf_hab_tripled" class="form-control" />
 
-                          <label class="input-group-text ms-3"><i class="fas fa-dollar"></i></label>
-                          <input type="text" id="apf_offert" placeholder="Oferta" name="apf_offert" class="form-control" required />
-                          <label class="input-group-text">Validez</label>
-                          <input type="text" id="apf_offert_validity" placeholder="Validez de la Oferta" name="apf_offert_validity" class="form-control" required />
-                        </div>
-                      </div>
-                      <br />
-                      <div class="input-group">
-                        <label class="input-group-text"><i class="fas fa-calendar"></i></label>
-                        <input type="date" id="apf_offert_from" placeholder="Oferta desde" name="apf_offert_from" class="form-control" />
-                        <label class="input-group-text"><i class="fas fa-calendar"></i></label>
-                        <input type="date" id="apf_offert_to" placeholder="Oferta hasta" name="apf_offert_to" class="form-control" />
-                        <label class="input-group-text"><i class="fas fa-building"></i></label>
-                        <input type="text" id="apf_provider" placeholder="Proveedor" name="apf_provider" class="form-control" />
                         <label class="input-group-text ms-3"><i class="fas fa-child"></i></label>
                         <input type="text" id="apf_kids_policy" placeholder="Politica de niños" name="apf_kids_policy" class="form-control" required />
                         <label class="input-group-text"><i class="fa fa-bed" aria-hidden="true"></i></label>
                         <input type="text" id="apf_room_vacancy" placeholder="Capacidad de Habitacion" name="apf_room_vacancy" class="form-control" required />
+                      </div>
+                      <br />
+                      <div class="input-group">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" name="apf_offert" value="" id="apf_offert_check" />
+                          <label class="form-check-label" for="flexCheckDefault"> Es una oferta? </label>
+                        </div>
+                      </div>
+                      <div id="offert_div" class="input-group">
+                        <label class="input-group-text">Tipo</label>
+                        <input type="text" id="apf_offert_validity" placeholder="Tipo de Oferta" name="apf_offert_validity" class="form-control" required />
+                        <label class="input-group-text">Empieza</label>
+                        <input type="date" id="apf_offert_from" placeholder="Oferta desde" name="apf_offert_from" class="form-control" />
+                        <label class="input-group-text">Termina</label>
+                        <input type="date" id="apf_offert_to" placeholder="Oferta hasta" name="apf_offert_to" class="form-control" />
                       </div>
                       <br />
 
@@ -140,7 +143,7 @@
                           <option value="minibus">Minibus</option>
                           <option value="bus">Bus</option>
                         </select>
-                        
+
                         <label class="input-group-text ms-3"><i class="fas fa-building"></i></label>
                         <input style="max-width: 200px" type="text" id="apf_agency" placeholder="Agencia" name="apf_agency" class="form-control" required />
 
@@ -170,26 +173,26 @@
 </div>
 
 <!-- Tabs navs -->
-  <div class="d-flex justify-content-end table-buttons">
-    <span class="me-2" data-tooltip="Eliminar los listados">
-      <button id="delete_price_button" type="button" class="btn btn-sm btn-danger btn-icon-split hide">
-        <span class="icon text-white"><i class="fa fa-minus-circle" aria-hidden="true"></i></span>
-        <span class="text"><strong>0</strong></span>
-      </button>
-    </span>
-    <span class="me-2" data-tooltip="Duplicar los listados">
-      <button id="duplicate_price_button" type="button" class="btn btn-sm btn-icon-split btn-success btn-icon-split hide">
-        <span class="icon text-white"><i class="fa fa-copy" aria-hidden="true"></i></span>
-        <span class="text text-white"><strong>0</strong></span>
-      </button>
-    </span>
-    <span class="me-5" data-tooltip="Copiar al Clipboard">
-      <button id="copy_price_button" type="button" class="btn btn-sm btn-icon-split btn-warning btn-icon-split hide">
-        <span class="icon text-white"><i class="fa fa-list" aria-hidden="true"></i></span>
-        <span class="text text-white"><strong>0</strong></span>
-      </button>
-    </span>
-  </div>
+<div class="d-flex justify-content-end table-buttons">
+  <span class="me-2" data-tooltip="Eliminar los listados">
+    <button id="delete_price_button" type="button" class="btn btn-sm btn-danger btn-icon-split hide">
+      <span class="icon text-white"><i class="fa fa-minus-circle" aria-hidden="true"></i></span>
+      <span class="text"><strong>0</strong></span>
+    </button>
+  </span>
+  <span class="me-2" data-tooltip="Duplicar los listados">
+    <button id="duplicate_price_button" type="button" class="btn btn-sm btn-icon-split btn-success btn-icon-split hide">
+      <span class="icon text-white"><i class="fa fa-copy" aria-hidden="true"></i></span>
+      <span class="text text-white"><strong>0</strong></span>
+    </button>
+  </span>
+  <span class="me-5" data-tooltip="Copiar al Clipboard">
+    <button id="copy_price_button" type="button" class="btn btn-sm btn-icon-split btn-warning btn-icon-split hide">
+      <span class="icon text-white"><i class="fa fa-list" aria-hidden="true"></i></span>
+      <span class="text text-white"><strong>0</strong></span>
+    </button>
+  </span>
+</div>
 <ul class="nav nav-tabs mb-3 mx-5" id="ex-with-icons" role="tablist">
   <li class="nav-item mx-3" role="presentation">
     <a class="nav-link active" data-color="blue" id="ex-with-icons-tab-1" data-toggle="tab" href="#ex-with-icons-tabs-1" role="tab" aria-controls="ex-with-icons-tabs-1" aria-selected="true"
@@ -217,7 +220,9 @@
             <thead class="table-dark fs-6 text-muted">
               <tr>
                 <th>
-                  <span data-tooltip-location="right" data-tooltip="Shift+Click para invertir la seleccion"><input id="data-check-all" class="data-check-all" dataset-id="data-t" name="" value="0" type="checkbox" /></span>
+                  <span data-tooltip-location="right" data-tooltip="Shift+Click para invertir la seleccion"
+                    ><input id="data-check-all" class="data-check-all" dataset-id="data-t" name="" value="0" type="checkbox"
+                  /></span>
                 </th>
                 <th>Codigo</th>
                 <th>Nombre</th>
@@ -271,7 +276,9 @@
             <thead class="table-dark fs-6 text-muted">
               <tr>
                 <th>
-                  <span data-tooltip-location="right" data-tooltip="Shift+Click para invertir la seleccion"><input id="data-check-all" class="data-check-all" name="" value="0" type="checkbox" /></span>
+                  <span data-tooltip-location="right" data-tooltip="Shift+Click para invertir la seleccion"
+                    ><input id="data-check-all" class="data-check-all" name="" value="0" type="checkbox"
+                  /></span>
                 </th>
                 <th>Codigo</th>
                 <th>Origen</th>
@@ -299,14 +306,11 @@
             </tbody>
           </form>
         </table>
-        </span>
       </main>
     </section>
   </div>
   <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">Details Content</div>
- 
 </div>
-
 
 <br /><br />
 <br /><br />
