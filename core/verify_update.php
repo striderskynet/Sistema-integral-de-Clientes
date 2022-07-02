@@ -1,6 +1,8 @@
 <?php
 require_once("config.php");
 
+print_r($_POST);
+//die();
 function download($file_source, $file_target)
 {
     $rh = fopen($file_source, 'rb');

@@ -28,6 +28,7 @@ if (isset($_SESSION['USERID'])) {
     <script>
         const last_commit = "<?php echo _COMMIT ?>";
         const github_address = "<?php echo $github['address'] ?>";
+        const github_shortname = "<?php echo $github['short_name'] ?>";
         const github_version = "<?php echo $github['version'] ?>";
     </script>
     <script type="text/javascript" src="./assets/js/jquery.min.js"></script>

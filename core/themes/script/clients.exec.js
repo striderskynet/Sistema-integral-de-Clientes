@@ -261,7 +261,9 @@ $("#main-table")
     }
   });
 
-$.get("./api/?clients&list", function (data) {
+var url = "./api/?clients&list";
+$.get(url, function (data) {
+  debug(`API: ${url}`, "info");
   populate_data(JSON.parse(data), offset, main_table, main_table_row);
 });
 
@@ -276,7 +278,9 @@ C_status.forEach(function (key) {
 });
 
 $("#add_client_modal").on("shown.bs.modal", function (e) {
-  $.get("./api/?prices&list&table=price_agency", function (data) {
+  var url = "./api/?prices&list&table=price_agency";
+  debug(`API: ${url}`, "info");
+  $.get(url, function (data) {
     populate_agency("#acf_contact_agency", JSON.parse(data));
     //populate_data(JSON.parse(data), offset, main_table, main_table_row);
   });

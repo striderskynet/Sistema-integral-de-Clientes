@@ -29,6 +29,19 @@ function populate_table(data, table, table_row) {
   table.find("tbody").html("");
 
   q = 0;
+
+  if (Object.keys(data).length === 0) {
+    const error_row = document.createElement("td");
+    error_row.classList.add("alert-danger", "text-center");
+    error_row.style = "padding: 10px;";
+
+    error_row.colSpan = table_row[0].cells.length;
+
+    error_row.innerHTML = "No existen elementos...";
+    table.find("tbody").append(error_row);
+    return false;
+  }
+
   Object.keys(data).forEach((key) => {
     let new_row = document.createElement("tr");
     new_row.innerHTML = tokenize(data[key], default_row);

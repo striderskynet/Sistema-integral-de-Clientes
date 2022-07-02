@@ -27,6 +27,7 @@ $config['misc']['pagination'] = 10;
 // GitHub Update Info
 $github['owner'] = "striderskynet";
 $github['proyect_name'] = "Sistema-integral-de-Clientes";
+$github['short_name'] = "SIC";
 $github['version'] = _VERSION;
 $github['address'] = "https://api.github.com/repos/{$github['owner']}/{$github['proyect_name']}/releases";
 

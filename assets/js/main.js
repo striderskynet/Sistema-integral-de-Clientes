@@ -58,7 +58,7 @@ function set_position(login = false) {
 
 // Function show_alert with a modified BootStrapGrowl
 function show_alert(type, message, timer = 10) {
-  console.log('Mostrando alerta de tipo "' + type + '" con mensaje "' + message + '"');
+  debug(`Showing alert ${type} with message ${message}`, type);
 
   $.bootstrapGrowl(message, {
     type: type,
@@ -171,7 +171,8 @@ function populate_data(clients_data, offset = 1, m_table, m_table_row, type = "c
 
     $q++;
   });
-  console.log("Populating database");
+  debug("Populating database", "success");
+  //console.log("Populating database");
 
   $("tr").on("mouseenter mouseleave", function () {
     if ($(this).attr("data-user-id")) {
@@ -218,8 +219,7 @@ function show_client_modal(id) {
         clientModalLabel.show();
       }
 
-      console.log("Mostrar modal con Usuario: " + id);
-      //console.log(modal_data.agency_data);
+      debug(`Mostrando modal con Usuario: ${id}`);
     });
   }
 }
@@ -677,12 +677,11 @@ $("#logout_button").click(function () {
 // Clear ClientModal and restoring
 $("#clientModal").on("hidden.bs.modal", function () {
   clientModalBody.innerHTML = default_clientModalBody;
-  console.log("Cerrando modal y restableciendo por defecto...");
+  debug("Cerrando modal y restableciendo por defecto...");
 });
 
 // On Remove Companion inside Modal
 $("#remove_voucher_companion").click(function () {
-  //console.log( "#companion_div_element_" + (comp - 1) );
   var companion_div = $("#companion_div_element_" + (comp - 1));
   var companion_div_auto = $("#avf_companion_" + (comp - 1) + "_autocomplete");
   companion_div.remove();
@@ -775,6 +774,7 @@ $("#add_voucher_form").submit(function (e) {
   });
 });
 
+/*
 // Setting Cookie for table size
 $("#small_table_value").click(function () {
   if (this.checked == true) {
@@ -789,6 +789,111 @@ $("#small_table_value").click(function () {
   // show_alert('success', "Agregar reserva a usuario: " + this.dataset.userId, 5);
   //  console.log(document.cookie);
 });
+*/
+
+const debug = (message, type) => {
+  var color = null;
+  switch (type) {
+    default:
+      color = "#4e73df";
+      break;
+    case "success":
+      color = "#bada55";
+      break;
+    case "danger":
+      color = "#e74a3b";
+      break;
+    case "warning":
+      color = "#f6c23e";
+      break;
+    case "info":
+      color = "#d3d3d3";
+      break;
+  }
+
+  console.log(`%c ${github_shortname} v${github_version}: ${message}`, "color:" + color);
+};
+
+// Check with GitHub if there is a new Release, and show the update button...
+const check_update = (interval, last_check = null) => {
+  var now = new Date();
+
+  now.setMinutes(now.getMinutes() + interval);
+  last_check_date = new Date(last_check);
+
+  next_check_date = last_check_date.setMinutes(last_check_date.getMinutes() + interval);
+  next_check_date = new Date(next_check_date);
+
+  var minutes = (now.getTime() - last_check_date.getTime()) / 60 / 1000;
+  console.log(now + last_check_date);
+  if (minutes > 1) {
+    debug(`Checking for updated versions... will check again in ${interval} minutes at ${now.toLocaleTimeString()}`, "success");
+
+    https: $.ajax({
+      url: github_address,
+      //headers: {"Authorization": "token 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"}
+    }).done(function (data) {
+      Object.keys(data).forEach((key) => {
+        if (data[key].tag_name >= github_version) {
+          $("#update_button").show();
+          $("#update_button")
+            .find(".text")
+            .html("Actualizar: v" + data[key].name);
+          setCookie(`${github_shortname}_update`, "true");
+          setCookie(`${github_shortname}_online_version`, data[key].tag_name);
+          setCookie(`${github_shortname}_zipball_url`, data[key].zipball_url);
+
+          last_check = new Date();
+          setCookie(`${github_shortname}_lastcheck`, last_check.toLocaleString());
+        } else {
+          setCookie(`${github_shortname}_update`, "false");
+          $("#update_button").hide();
+        }
+
+        $("#update_button").click(function () {
+          console.log(data[key]);
+          if (confirm("Estas seguro de querer actualizar?")) {
+            $.ajax({
+              url: "./core/verify_update.php",
+              type: "POST",
+              data: { data: data[key] },
+              success: function (msg) {
+                console.log(msg);
+              },
+            });
+          }
+        });
+        return true;
+      });
+    });
+  } else {
+    if (getCookie(`${github_shortname}_update`) == "true") {
+      $("#update_button").show();
+      $("#update_button")
+        .find(".text")
+        .html("Actualizar: v" + getCookie(`${github_shortname}_online_version`));
+
+      $("#update_button").click(function () {
+        var post_data = [];
+        post_data["tag_name"] = getCookie(`${github_shortname}_online_version`);
+        post_data["zipball_url"] = getCookie(`${github_shortname}_zipball_url`);
+
+        console.log(post_data);
+        if (confirm("Estas seguro de querer actualizar?")) {
+          $.ajax({
+            url: "./core/verify_update.php",
+            type: "POST",
+            data: { data: post_data },
+            success: function (msg) {
+              console.log(msg);
+            },
+          });
+        }
+      });
+    }
+    debug(`Checking for updated versions... skipped, waiting until ${next_check_date.toLocaleString()}`, "success");
+  }
+};
 
 // ACTIONS //
 $(document).ready(function () {
@@ -801,55 +906,19 @@ $(document).ready(function () {
     $("#main-table").addClass("table-sm");
   }
 
-  /*
-  https: $.ajax({
-    url: "https://api.github.com/repos/striderskynet/Sistema-integral-de-Clientes/branches/master",
-    //headers: {"Authorization": "token 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"}
-  }).done(function (data) {
-    //console.log(data);
-    var com = [];
-    com["message"] = data.commit.commit.message;
-    com["user"] = data.commit.commit.committer.name;
-    com["date"] = data.commit.commit.committer.date;
+  var check_minutes = 10;
+  var check_interval = check_minutes * 60 * 1000;
+  var last_check = getCookie(`${github_shortname}_lastcheck`);
 
-    var date_commit = new Date(com["date"]);
-    var date_last = new Date(last_commit);
+  check_update(check_minutes, last_check);
+  setInterval(function () {
+    check_update(check_minutes, last_check);
+  }, check_interval);
 
-    if (date_commit > date_last)
-      alert(
-        "exclamation",
-        "danger",
-        `Existe una nueva actualizacion del sistema con fecha de <strong>${date_commit.toLocaleDateString("en-US")}</strong> por "<strong>${com["user"]}</strong>" con el mensaje "${com["message"]}"`,
-        date_commit.toLocaleDateString("en-US")
-      );
-  });*/
-
-  https: $.ajax({
-    url: github_address,
-    //headers: {"Authorization": "token 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"}
-  }).done(function (data) {
-    Object.keys(data).forEach((key) => {
-      if (data[key].tag_name >= github_version) {
-        $("#update_button").toggle();
-        $("#update_button")
-          .find(".text")
-          .html("Actualizar: v" + data[key].name);
-      }
-
-      $("#update_button").click(function () {
-        if (confirm("Estas seguro de querer actualizar?")) {
-          $.ajax({
-            url: "./core/verify_update.php",
-            type: "POST",
-            data: { data: data[key] },
-            success: function (msg) {
-              console.log(msg);
-            },
-          });
-        }
-      });
-    });
-  });
+  if (last_check == "") {
+    last_check = new Date();
+    setCookie(`${github_shortname}_lastcheck`, last_check.toLocaleString());
+  }
 
   $("input[type=password]").each(function (e) {
     if ($(this).hasClass("no-eye") === false) {
@@ -890,7 +959,9 @@ $(document).ready(function () {
     const service_partner = $("#avf_servicePartner");
 
     if (item.text.includes("<main_type>")) {
-      $.get(`./api/?prices&list&wh=WHERE+id+=+${item.value}`, function (data) {
+      var url = `./api/?prices&list&wh=WHERE+id+=+${item.value}`;
+      $.get(url, function (data) {
+        debug(`Llamando a api: ${url}`, `info`);
         data = JSON.parse(data);
         element.value = data[0].code;
 
@@ -901,7 +972,9 @@ $(document).ready(function () {
         out_date.prop("max", data[0].to_date);
       });
     } else if (item.text.includes("<transport_type>")) {
-      $.get(`./api/?prices&list&table=price_transport&wh=WHERE+id+=+${item.value}`, function (data) {
+      var url = `./api/?prices&list&table=price_transport&wh=WHERE+id+=+${item.value}`;
+      $.get(url, function (data) {
+        debug(`Llamando a api: ${url}`, `info`);
         data = JSON.parse(data);
         element.value = data[0].code;
         service_partner[0].value = data[0].agency;
